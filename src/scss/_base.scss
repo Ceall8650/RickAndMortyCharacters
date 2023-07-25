@@ -1,0 +1,13 @@
+* {
+	@apply font-normal;
+	@apply text-base;
+	@apply font-serif;
+	@apply font-sans;
+}
+
+html,
+body,
+#root {
+	@apply w-full;
+	@apply h-full;
+}
