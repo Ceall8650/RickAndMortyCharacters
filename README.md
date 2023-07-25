@@ -4,6 +4,7 @@ A character introduction for all characters in Rick and Morty
 ## Project Environment
 * Node v18.15.0 (if you use the NVM to manage the node versions, make sure the nvm version should be at least `v0.39.3`)
 * React 18.2.0
+* React Router v6.14.2
 * Tailwind 3
 
 ## Available Scripts
