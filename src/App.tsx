@@ -1,8 +1,11 @@
+import SideBar from 'views/SideBar';
+import ContactList from 'views/Contact/ContactList';
 
 function App() {
   return (
-    <div className="w-full h-full">
-      Home
+    <div className="h-full grid grid-cols-app">
+      <SideBar />
+      <ContactList />
     </div>
   );
 }
