@@ -5,7 +5,7 @@ import SideBar from 'views/SideBar';
 function App() {
   return (
     <div className="h-full grid grid-cols-app">
-      <SideBar className="border-r border-gray-300" />
+      <SideBar/>
       <Suspense fallback={<div>Page is Loading...</div>}>
         <Outlet />
       </Suspense>

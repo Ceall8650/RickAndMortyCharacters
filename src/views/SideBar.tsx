@@ -5,8 +5,8 @@ type Props = React.HTMLAttributes<HTMLDivElement>
 
 function SideBar(props: Props) {
   return (
-    <div {...props}>
-      <h1 className="text-2xl">Rick and Morty</h1>
+    <div className="border-r border-gray-300 px-2 pt-2"  {...props}>
+      <h1 className="text-2xl mb-2">Rick and Morty</h1>
       <NavLink to={ROUTER_PATHNAME.CONTACT}>
         Contact
       </NavLink>
