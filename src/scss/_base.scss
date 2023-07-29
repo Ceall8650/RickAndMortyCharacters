@@ -11,3 +11,13 @@ body,
 	@apply w-full;
 	@apply h-full;
 }
+
+table, th, td {
+	@apply border border-gray-300;
+}
+
+table {
+	th, td{
+		@apply px-2 pt-1;
+	}
+}

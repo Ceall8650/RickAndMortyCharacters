@@ -1,15 +1,21 @@
+import { NavLink } from "react-router-dom";
+
 type ContactBookCharacterProps = {
   character: Character;
 };
-
-type Props = ContactBookCharacterProps & React.HTMLAttributes<HTMLDivElement>
+type Props = ContactBookCharacterProps & React.HTMLAttributes<HTMLAnchorElement>
 
 function ContactBookCharacter({ 
   character,
   className,
+  ...props
 }: Props) {
   return (
-    <div className={`py-4 px-4 flex items-center ${className}`}>
+    <NavLink
+      to={String(character.id)}
+      className={`py-4 px-4 flex items-center ${className}`} 
+      { ...props }
+    >
       <img
         src={character.image}
         alt="Avatar"
@@ -21,7 +27,7 @@ function ContactBookCharacter({
         <span className="mb-2">{character.name}</span>
         <span>{character.species}</span>
       </div>
-    </div>
+    </NavLink>
   );
 }
 

@@ -5,6 +5,10 @@ type Props = {
 }
 
 function ContactBookCharacterList({ characters }: Props) {
+  function handleClick(e:React.MouseEvent) {
+    e.stopPropagation();
+  }
+
   return (
     <div className="h-full overflow-auto">
       {
@@ -12,7 +16,12 @@ function ContactBookCharacterList({ characters }: Props) {
           <ContactBookCharacter
             key={character.id}
             character={character}
-            className={index !== characters.length-1 ? 'border-b border-gray-300' : ''}
+            className={`
+              hover:cursor-pointer
+              hover:bg-blue-100
+              ${index !== characters.length-1 ? 'border-b border-gray-300' : ''}
+            `}
+            onClick={handleClick}
           />
         ))
       }
