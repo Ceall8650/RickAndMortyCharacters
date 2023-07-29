@@ -1,15 +1,8 @@
 import http from 'services/http';
 
-type AllEpisodesResponse = {
-  info: Object,
-  results: Episode[],
-}
-
 const EPISODE = {
-  async getAll(): Promise<Episode[]> {
-    const { results } = await http.get<any, AllEpisodesResponse>('https://rickandmortyapi.com/api/episode')
-
-    return results
+  async get(id: string): Promise<Episode> {
+    return http.get<any, Episode>(`https://rickandmortyapi.com/api/episode/${id}`)
   }
 }
 
