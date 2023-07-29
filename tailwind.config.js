@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        "app": "minmax(100px, 4fr) minmax(150px, 6fr) minmax(375px, 15fr)"
+        "app": "minmax(200px, 4fr) minmax(1050px, 21fr)",
+        "contact": "minmax(450px, 9fr) minmax(600px, 12fr)",
       }
     },
   },
