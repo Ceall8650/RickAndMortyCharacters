@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.9f8bc558.css",
-    "main.js": "/static/js/main.e10bb09b.js",
-    "ContactView.js": "/static/js/ContactView.e34eedef.chunk.js",
-    "static/js/265.393b31a8.chunk.js": "/static/js/265.393b31a8.chunk.js",
-    "index.html": "/index.html",
-    "main.9f8bc558.css.map": "/static/css/main.9f8bc558.css.map",
-    "main.e10bb09b.js.map": "/static/js/main.e10bb09b.js.map",
-    "ContactView.e34eedef.chunk.js.map": "/static/js/ContactView.e34eedef.chunk.js.map",
-    "265.393b31a8.chunk.js.map": "/static/js/265.393b31a8.chunk.js.map"
+    "main.css": "/RickAndMortyCharacters/static/css/main.9f8bc558.css",
+    "main.js": "/RickAndMortyCharacters/static/js/main.a10c075e.js",
+    "ContactView.js": "/RickAndMortyCharacters/static/js/ContactView.e34eedef.chunk.js",
+    "static/js/265.393b31a8.chunk.js": "/RickAndMortyCharacters/static/js/265.393b31a8.chunk.js",
+    "index.html": "/RickAndMortyCharacters/index.html",
+    "main.9f8bc558.css.map": "/RickAndMortyCharacters/static/css/main.9f8bc558.css.map",
+    "main.a10c075e.js.map": "/RickAndMortyCharacters/static/js/main.a10c075e.js.map",
+    "ContactView.e34eedef.chunk.js.map": "/RickAndMortyCharacters/static/js/ContactView.e34eedef.chunk.js.map",
+    "265.393b31a8.chunk.js.map": "/RickAndMortyCharacters/static/js/265.393b31a8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9f8bc558.css",
-    "static/js/main.e10bb09b.js"
+    "static/js/main.a10c075e.js"
   ]
 }
