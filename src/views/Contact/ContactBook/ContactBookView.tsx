@@ -42,14 +42,17 @@ function ContactBook({ className, ...props }: Props) {
 
   return (
     <div 
-      className={`overflow-hidden ${className}`}
+      className={`flex flex-col overflow-hidden ${className}`}
       {...props}
     >
       <ContactBookSearch 
         className=" border-b border-gray-300"
         setFilter={setFilter}
       />
-      <ContactBookCharacterList characters={filteredCharacters} />
+      <ContactBookCharacterList
+      className="flex-auto"
+      characters={filteredCharacters} 
+    />
     </div>
   )
 }
