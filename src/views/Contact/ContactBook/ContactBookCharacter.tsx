@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import CharacterContext from 'context/CharacterContext';
 import { NavLink } from "react-router-dom";
 
 type ContactBookCharacterProps = {
@@ -10,10 +12,17 @@ function ContactBookCharacter({
   className,
   ...props
 }: Props) {
+  const { setCharacter } = useContext(CharacterContext)
+  function handleClick(e: React.MouseEvent) {
+    e.stopPropagation()
+    setCharacter(character)
+  }
+
   return (
     <NavLink
       to={String(character.id)}
       className={`py-4 px-4 flex items-center ${className}`} 
+      onClick={handleClick}
       { ...props }
     >
       <img

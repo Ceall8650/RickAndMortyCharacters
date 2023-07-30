@@ -18,15 +18,14 @@ function ContactBookCharacterList({ filter }: Props) {
   const characterListRef = useRef<HTMLDivElement|null>(null)
   const CHARACTER_CARD_HEIGHT = 135
 
-  const getCharacters = useCallback(async() => {
+  useEffect(() => {
+    async function getCharacters() {
       const characters = await SERVICES.CHARACTER.getAll(filter);
   
       setCharacters(characters)
-  }, [filter])
-
-  useEffect(() => {
+    }
     getCharacters()
-  }, [getCharacters])
+  }, [filter])
 
   useEffect(() => {
     if(!Object.keys(filter).length) {
@@ -79,7 +78,6 @@ function ContactBookCharacterList({ filter }: Props) {
                   hover:bg-blue-100
                   ${index !== characters.length-1 ? 'border-b border-gray-300' : ''}
                 `}
-                onClick={(e: React.MouseEvent) => e.stopPropagation()}
               />
               )
             )
