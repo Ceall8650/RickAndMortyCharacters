@@ -1,44 +1,11 @@
-import { useState, useEffect } from 'react';
-import SERVICES from 'services';
+import { useState } from 'react';
 import ContactBookSearch from './ContactBookSearch';
 import ContactBookCharacterList from './ContactBookCharacterList';
 
 type Props = React.HTMLAttributes<HTMLDivElement>
 
 function ContactBook({ className, ...props }: Props) {
-  const [characters, setCharacters] = useState<Character[]>([])
-  const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([])
-  const [filter, setFilter] = useState({
-    keyword: '',
-    status: '',
-    gender: ''
-  })
-
-  async function init() {
-    const characters = await SERVICES.CHARACTER.getAll();
-
-    setCharacters(characters)
-  }
-
-  useEffect(() => {
-    init()
-  }, [])
-
-  useEffect(() => {
-    if(!filter.keyword && !filter.status && !filter.gender) {
-      setFilteredCharacters(characters)
-
-      return
-    }
-
-    const filteredCharacters = characters.filter(character => {
-      return (!filter.keyword || character.name.toLowerCase().includes(filter.keyword.toLowerCase()) )
-        && (!filter.status || character.status === filter.status)
-        && (!filter.gender || character.gender === filter.gender)
-    })
-
-    setFilteredCharacters(filteredCharacters)
-  }, [filter, characters])
+  const [filter, setFilter] = useState({})
 
   return (
     <div 
@@ -51,7 +18,7 @@ function ContactBook({ className, ...props }: Props) {
       />
       <ContactBookCharacterList
       className="flex-auto"
-      characters={filteredCharacters} 
+      filter={filter}
     />
     </div>
   )

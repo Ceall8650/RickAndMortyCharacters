@@ -32,7 +32,7 @@ function DropdownRadioGroup({
 
   const clearActiveRadio = useCallback((e: React.MouseEvent<HTMLElement>) => {
     if(onChange) {
-      onChange('')
+      onChange()
     }
     e.stopPropagation()
     setSelectedValue('')

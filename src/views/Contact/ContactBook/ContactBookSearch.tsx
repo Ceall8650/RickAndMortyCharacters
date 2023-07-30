@@ -20,7 +20,7 @@ function ContactBookSearch({
   const genderRadios = [
     { label: 'Male', value: 'Male' },
     { label: 'Female', value: 'Female' },
-    { label: 'Genderless', value: 'genderless' },
+    { label: 'Genderless', value: 'Genderless' },
     { label: 'Unknown', value: 'unknown' },
   ]
 
