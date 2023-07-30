@@ -1,5 +1,5 @@
 import SERVICES from 'services';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FixedSizeList as List } from "react-window";
 import ContactBookCharacter from './ContactBookCharacter';
 
@@ -13,7 +13,6 @@ function ContactBookCharacterList({ filter }: Props) {
   const [characterCardListHeight, setCharacterCardListHeight] = useState(900)
   const [characters, setCharacters] = useState<Character[]>([])
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([])
-  const [characterAmount, setCharacterAmount] = useState(0)
 
   const characterListRef = useRef<HTMLDivElement|null>(null)
   const CHARACTER_CARD_HEIGHT = 135
@@ -45,9 +44,6 @@ function ContactBookCharacterList({ filter }: Props) {
 
   useEffect(() => {
     if (characterListRef.current) {
-      const maxCharacterAmountOnView = Math.ceil(characterListRef.current.offsetHeight / CHARACTER_CARD_HEIGHT)
-
-      setCharacterAmount(maxCharacterAmountOnView)
       setCharacterCardListWidth(characterListRef.current.clientWidth);
       setCharacterCardListHeight(characterListRef.current.offsetHeight);
     }
