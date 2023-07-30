@@ -2,6 +2,7 @@
   "name": "contact_info",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Ceall8650.github.io/RickAndMortyCharacters/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -22,7 +23,9 @@
     "start": "PORT=5000 react-scripts start -p 5000",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +50,7 @@
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "gh-pages": "^5.0.0",
     "postcss": "^8.4.27",
     "qs": "^6.11.2",
     "sass": "^1.64.1",
