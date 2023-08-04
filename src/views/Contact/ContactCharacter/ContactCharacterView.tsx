@@ -9,7 +9,7 @@ function ContactCharacterView() {
   return (
     character 
     ?
-      <div className="pt-10 overflow-auto">
+      <div className="flex flex-col pt-10 overflow-auto">
         <div className="px-10 pb-5 flex items-center border-b border-gray-300">
           <img
             src={character.image}
@@ -20,7 +20,7 @@ function ContactCharacterView() {
           /> 
           <h3 className="text-4xl">{character.name}</h3>
         </div>
-        <div className="px-10">
+        <div className="flex-auto overflow-auto px-10">
           <ContactCharacterPersonalInfo character={character} />
           <ContactCharacterEpisode episodeUrls={character.episode} />
         </div>
