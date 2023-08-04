@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import ContactBookSearch from './ContactBookSearch';
 import ContactBookCharacterList from './ContactBookCharacterList';
 
 type Props = React.HTMLAttributes<HTMLDivElement>
 
-function ContactBook({ className, ...props }: Props) {
+const ContactBook = memo(({ className, ...props }: Props) => {
   const [filter, setFilter] = useState({})
 
   return (
@@ -22,6 +22,6 @@ function ContactBook({ className, ...props }: Props) {
     />
     </div>
   )
-}
+})
 
 export default ContactBook

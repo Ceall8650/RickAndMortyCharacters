@@ -12,7 +12,6 @@ function ContactBookCharacterList({ filter }: Props) {
   const [characterCardListWidth, setCharacterCardListWidth] = useState(450)
   const [characterCardListHeight, setCharacterCardListHeight] = useState(900)
   const [characters, setCharacters] = useState<Character[]>([])
-  const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([])
 
   const characterListRef = useRef<HTMLDivElement|null>(null)
   const CHARACTER_CARD_HEIGHT = 135
@@ -25,22 +24,6 @@ function ContactBookCharacterList({ filter }: Props) {
     }
     getCharacters()
   }, [filter])
-
-  useEffect(() => {
-    if(!Object.keys(filter).length) {
-      setFilteredCharacters(characters)
-
-      return
-    }
-
-    const filteredCharacters = characters.filter(character => {
-      return (!filter.keyword || character.name.toLowerCase().includes(filter.keyword.toLowerCase()) )
-        && (!filter.status || character.status === filter.status)
-        && (!filter.gender || character.gender === filter.gender)
-    })
-
-    setFilteredCharacters(filteredCharacters)
-  }, [filter, characters])
 
   useEffect(() => {
     if (characterListRef.current) {
@@ -56,8 +39,8 @@ function ContactBookCharacterList({ filter }: Props) {
         width={characterCardListWidth}
         height={characterCardListHeight}
         itemSize={CHARACTER_CARD_HEIGHT}
-        itemCount={filteredCharacters.length}
-        itemData={filteredCharacters}
+        itemCount={characters.length}
+        itemData={characters}
       >
         {
           ({index, style}) => {
@@ -69,11 +52,7 @@ function ContactBookCharacterList({ filter }: Props) {
                 style={style}
                 key={character.id}
                 character={character}
-                className={`
-                  hover:cursor-pointer
-                  hover:bg-blue-100
-                  ${index !== characters.length-1 ? 'border-b border-gray-300' : ''}
-                `}
+                className={`hover:cursor-pointer hover:bg-blue-100 ${index !== characters.length-1 ? 'border-b border-gray-300' : ''}`}
               />
               )
             )
