@@ -1,32 +1,27 @@
-import qs from 'qs';
 import http from 'services/http';
 
-type AllCharactersResponse = {
-  info: Object,
+type Info = {
+  next: string
+}
+
+type AllCharactersHttpResponse = {
+  info: Info,
   results: Character[]
 }
-type Query = {
-  name?: string,
-  status?: string,
-  species?: string,
-  type?: string,
-  gender?: string,
+
+type AllCharactersResponse = {
+  info: Info,
+  characters: Character[]
 }
 
 const CHARACTER = {
-  async getAll(query?: Query): Promise<Character[]> {
-    const queryString = qs.stringify({
-      name: query?.name,
-      status: query?.status,
-      species: query?.species,
-      type: query?.type,
-      gender: query?.gender,
-    })
-    const endPoint = 'https://rickandmortyapi.com/api/character'
-    const fullPath = queryString ? `${endPoint}?${queryString}` : endPoint
-    const { results } = await http.get<any, AllCharactersResponse>(fullPath)
+  async getAll(url: string): Promise<AllCharactersResponse> {
+    const { info, results } = await http.get<any, AllCharactersHttpResponse>(url)
 
-    return results
+    return {
+      characters: results,
+      info, 
+    }
   },
 
   async get(id:string): Promise<Character> {

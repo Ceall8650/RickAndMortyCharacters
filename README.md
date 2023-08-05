@@ -18,19 +18,18 @@ Used APIs in the page:
 
 ## Features
 - [X] Dynamic load the component
-- [X] Infinity scrolling
-- [X] Get the character list based on the filters
+- [X] Lazy loading the API of the character
+- [X] Filter the characters with search conditions
 
 - Dynamic load the component
   - When click the `Contact` item of the sidebar menu, the page will navigate to the `/contact` page, the characters of the Rick And Morty would be displayed on the page. 
   - The component for displaying the character list will be loaded at this time
 
-- Infinity scrolling
-  - The DOM for all characters would `NOT` be rendered when retrieve the character list, only the DOM of the characters on the viewpoint would be rendered. When scrolling the character list, the browser would remove the characters which are out of the viewpoint and render the characters who enter the viewpoint.
-  - The images of each character would be loaded when the render a new character who just enter the viewpoint
+- Lazy loading the API of the character
+  - When scroll to the bottom of the character list, the page would fetch new character list with API and append the list to the current list.
 
-- Get the character list based on the filters
-  - When select one of the option of the`Status` or `Gender` dropdown, the new character list with these filter conditions would be fetched from API. 
+- Filter the characters with search conditions
+  - When select one of the option of the`Status` or `Gender` dropdown, the character list would be displayed with these filter conditions. 
 
 ## Available Scripts
 

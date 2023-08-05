@@ -8,6 +8,10 @@ type Origin = {
   url: string,
 }
 
+declare type CharacterPageInfo = {
+  next: string
+}
+
 declare type Character = {
   "id": number,
   "name": string,

@@ -1,6 +1,5 @@
 import SERVICES from 'services';
-import { useState, useRef, useEffect } from 'react';
-import { FixedSizeList as List } from "react-window";
+import { useState, useEffect, useMemo } from 'react';
 import ContactBookCharacter from './ContactBookCharacter';
 
 type ContactBookCharacterListProps = {
@@ -9,71 +8,83 @@ type ContactBookCharacterListProps = {
 type Props = ContactBookCharacterListProps & React.HTMLAttributes<HTMLDivElement>
 
 function ContactBookCharacterList({ filter }: Props) {
-  const [characterCardListWidth, setCharacterCardListWidth] = useState(450)
-  const [characterCardListHeight, setCharacterCardListHeight] = useState(900)
+  const [nextPageApi, setNextPageApi] = useState('https://rickandmortyapi.com/api/character')
+  const [pageInfo, setPageInfo] = useState<CharacterPageInfo|null>(null)
+  const [fetchedCharacters, setFetchedCharacters] = useState<Character[]>([])
   const [characters, setCharacters] = useState<Character[]>([])
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([])
-  const characterListRef = useRef<HTMLDivElement|null>(null)
-  const CHARACTER_CARD_HEIGHT = 135
+
+  const intersectionObserver = useMemo(() => {
+    const options = {
+      root: document.querySelector('#characterListContainer'),
+      rootMargin: '0px',
+      threshold: 0
+    }
+
+    return new IntersectionObserver((entries) => {
+      if(entries[0].isIntersecting) {
+        if(pageInfo) {
+          setNextPageApi(pageInfo.next)
+        }
+        console.log("The item enters the viewpoint");
+      }
+    }, options)
+  }, [pageInfo])
+
+  useEffect(() => {
+    const lastCharacterId = filteredCharacters[filteredCharacters.length-1]?.id
+
+    if(lastCharacterId) {
+      const lastCharacterElement = document.querySelector(`#character_${lastCharacterId}`) as Element
+
+      intersectionObserver.observe(lastCharacterElement)
+    }
+  }, [filteredCharacters, intersectionObserver]);
 
   useEffect(() => {
     async function getCharacters() {
-      const characters = await SERVICES.CHARACTER.getAll();
+      const { info, characters } = await SERVICES.CHARACTER.getAll(nextPageApi);
   
-      setCharacters(characters)
+      setFetchedCharacters(characters)
+      setPageInfo(info)
     }
     getCharacters()
-  }, [])
-
-    useEffect(() => {
-      if(!Object.keys(filter).length) {
-        setFilteredCharacters(characters)
-  
-        return
-      }
-  
-      const filteredCharacters = characters.filter(character => {
-        return (!filter.keyword || character.name.toLowerCase().includes(filter.keyword.toLowerCase()) )
-          && (!filter.status || character.status === filter.status)
-          && (!filter.gender || character.gender === filter.gender)
-      })
-  
-      setFilteredCharacters(filteredCharacters)
-    }, [filter, characters])
+  }, [nextPageApi])
 
   useEffect(() => {
-    if (characterListRef.current) {
-      setCharacterCardListWidth(characterListRef.current.clientWidth);
-      setCharacterCardListHeight(characterListRef.current.offsetHeight);
+    setCharacters(prev => {
+      return [...prev, ...fetchedCharacters]
+    })
+  }, [fetchedCharacters])
+
+  useEffect(() => {
+    if(!Object.keys(filter).length) {
+      setFilteredCharacters(characters)
+
+      return
     }
-  }, [characterListRef]);
+
+    const filteredCharacters = characters.filter(character => {
+      return (!filter.keyword || character.name.toLowerCase().includes(filter.keyword.toLowerCase()) )
+        && (!filter.status || character.status === filter.status)
+        && (!filter.gender || character.gender === filter.gender)
+    })
+
+    setFilteredCharacters(filteredCharacters)
+  }, [filter, characters])
 
   return (
-    <div ref={characterListRef} className='h-full overflow-auto'>
-      <List
-        width={characterCardListWidth}
-        height={characterCardListHeight}
-        itemSize={CHARACTER_CARD_HEIGHT}
-        itemCount={filteredCharacters.length}
-        itemData={filteredCharacters}
-      >
+    <div id="characterListContainer" className='h-full overflow-auto'>
         {
-          ({index, style}) => {
-            const character = characters[index]
-
-            return (
-              (
-                <ContactBookCharacter
-                style={style}
+          filteredCharacters.map((character, index) => (
+            <ContactBookCharacter
+                id={`character_${character.id}`}
                 key={character.id}
                 character={character}
-                className={`hover:cursor-pointer hover:bg-blue-100 ${index !== characters.length-1 ? 'border-b border-gray-300' : ''}`}
+                className={`hover:cursor-pointer hover:bg-blue-100 ${index !== filteredCharacters.length-1 ? 'border-b border-gray-300' : ''}`}
               />
-              )
-            )
-          }
+          ))
         }
-      </List>
     </div>
   )
 }
